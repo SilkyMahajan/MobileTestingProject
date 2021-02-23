@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="201477" started-at="2021-02-23T16:47:32Z" finished-at="2021-02-23T16:50:53Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="201477" started-at="2021-02-23T16:47:32Z" finished-at="2021-02-23T16:50:53Z">
+      <class name="Test.Mobile.TestSet1">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:Test.Mobile.TestSet1@3532ec19]" name="beforeClass" is-config="true" duration-ms="84302" started-at="2021-02-23T22:17:32Z" finished-at="2021-02-23T22:18:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="login()[pri:0, instance:Test.Mobile.TestSet1@3532ec19]" name="login" duration-ms="39880" started-at="2021-02-23T22:18:56Z" finished-at="2021-02-23T22:19:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method status="PASS" signature="TestSorting()[pri:1, instance:Test.Mobile.TestSet1@3532ec19]" name="TestSorting" duration-ms="19887" started-at="2021-02-23T22:19:36Z" finished-at="2021-02-23T22:19:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TestSorting -->
+        <test-method status="PASS" signature="AddItemToCart()[pri:2, instance:Test.Mobile.TestSet1@3532ec19]" name="AddItemToCart" duration-ms="36117" started-at="2021-02-23T22:19:56Z" finished-at="2021-02-23T22:20:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AddItemToCart -->
+        <test-method status="PASS" signature="ShoppingCart()[pri:3, instance:Test.Mobile.TestSet1@3532ec19]" name="ShoppingCart" duration-ms="9423" started-at="2021-02-23T22:20:34Z" finished-at="2021-02-23T22:20:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ShoppingCart -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:Test.Mobile.TestSet1@3532ec19]" name="afterClass" is-config="true" duration-ms="9656" started-at="2021-02-23T22:20:43Z" finished-at="2021-02-23T22:20:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- Test.Mobile.TestSet1 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
