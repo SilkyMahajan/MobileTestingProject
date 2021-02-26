@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="Test.Mobile.TestSet1">
+      <class name="Test.Mobile.TaskDataDriven">
         <methods>
+          <include name="TestSortingValuesFromxls"/>
           <include name="afterClass"/>
-          <include name="ShoppingCart"/>
           <include name="beforeClass"/>
         </methods>
-      </class> <!-- Test.Mobile.TestSet1 -->
+      </class> <!-- Test.Mobile.TaskDataDriven -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

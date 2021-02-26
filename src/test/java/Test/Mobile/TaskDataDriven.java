@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -15,6 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
@@ -27,11 +30,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 
-public class TestSet1 {
+public class TaskDataDriven {
 	
 public AndroidDriver driver;
 String ExpectedProduct;
 String ExpectedProductshoe;
+//File Screnshotfile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
 	@BeforeClass
 	public void beforeClass() throws MalformedURLException 
 	{
@@ -59,38 +64,42 @@ String ExpectedProductshoe;
 	}
 	
 	@Test (priority=1)
-	public void TestSorting()
+	public void TestSortingValuesFromxls() throws IOException, InterruptedException
 	{
-        driver.findElement(By.xpath("//span[@class='icon']")).click();
-        driver.findElement(By.xpath("//a[contains(text(),'Computers')]//following-sibling::span")).click();
-        driver.findElement(By.xpath("//li[@class='active']//ul//a[contains(text(),'Notebooks')]")).click();
-        
-        WebElement divElement = driver.findElement(By.xpath("//div[@class= 'page-title']//h1"));
-        String ExpectedHeader= divElement.getText();
-        String ActualHeader="Notebooks";
-        System.out.println(ExpectedHeader);
-        Assert.assertEquals(ActualHeader, ExpectedHeader);
-        
-        WebElement ddl= driver.findElement(By.xpath("//*[@id='products-orderby']"));
-        Select selectvalue = new Select(ddl);
-        selectvalue.selectByVisibleText("Created on");
-        
-        WebElement idElement = driver.findElement(By.xpath("//*[@id='products-orderby']/option[@selected]"));
-        String ExpectedoptionSelected=idElement.getText();
-        System.out.println(ExpectedoptionSelected);
-        String ActualoptionSelected="Created on";
-        Assert.assertEquals(ExpectedoptionSelected, ActualoptionSelected);
-        
-        WebElement hrefElement = driver.findElement(By.xpath("//h2[@class= 'product-title']/a"));
-        ExpectedProduct=hrefElement.getText();
-        System.out.println(ExpectedProduct);
-        String ActualProduct ="14.1-inch Laptop";
-        System.out.println(ExpectedProduct);
-        Assert.assertEquals(ExpectedProduct, ActualProduct);
-        
-        driver.findElement(By.xpath("//input[@value='Add to cart']")).click();
-        
+		driver.findElement(By.xpath("//span[@class='icon']")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'Computers')]//following-sibling::span")).click();
+		driver.findElement(By.xpath("//li[@class='active']//ul//a[contains(text(),'Notebooks')]")).click();
 	        
+	        WebElement divElement = driver.findElement(By.xpath("//div[@class= 'page-title']//h1"));
+	        String ExpectedHeader= divElement.getText();
+	        String ActualHeader="Notebooks";
+	        System.out.println(ExpectedHeader);
+	        Assert.assertEquals(ActualHeader, ExpectedHeader);
+	        
+	        File file =    new File("C:\\Silky\\SeleniumTraining\\Workspace\\NotbookValues.xlsx");
+	        FileInputStream fs = new FileInputStream(file);
+	     
+	        XSSFWorkbook workbook = new XSSFWorkbook(fs);
+	        XSSFSheet sheet = workbook.getSheetAt(0);
+	        
+	        int rowCount=sheet.getLastRowNum()-sheet.getFirstRowNum();
+	        for(int i=1;i<=rowCount;i++){
+	        	int cellcount=sheet.getRow(i).getLastCellNum();
+	        	System.out.println("Row"+ i+" data is :");
+	        	for(int j=0;j<cellcount;j++){
+	        		WebElement ddl= driver.findElement(By.xpath("//*[@id='products-orderby']"));
+	        		Select selectvalue = new Select(ddl);
+	        		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	        		
+	    	        selectvalue.selectByVisibleText(sheet.getRow(i).getCell(j).getStringCellValue());
+	    	        Thread.sleep(2000);
+	                System.out.print(sheet.getRow(i).getCell(j).getStringCellValue() +",");
+	                File Screnshotfile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	                String Screenname="C:\\Silky\\SeleniumTraining\\Mobile testing\\ScrrenShots\\first"+i+".jpeg";
+	                FileUtils.copyFile(Screnshotfile, new File(Screenname));
+	            }
+	            System.out.println();
+	        }	        
 	}
 	
 	@Test(priority=2)
